@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>마라미니 비주얼 메뉴 · Mala Mini Palisades Park</title>
-<meta name="description" content="Mala Mini (마라미니) Palisades Park 우버이츠 메뉴 — 사진 입힌 비주얼 가이드" />
+<meta name="description" content="마라샹궈·마라탕 + 전체 메뉴 + 재료 사진·칼로리·밥/콜라 환산" />
 <style>
   :root{
     --bg:#0f0805; --panel:#1f120c; --panel2:#2a1812; --line:#3a2018;
@@ -16,373 +16,753 @@
   html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"SF Pro KR","Pretendard",ui-sans-serif,system-ui,sans-serif;-webkit-text-size-adjust:100%}
   a{color:var(--gold);text-decoration:none}
   a:hover{text-decoration:underline}
-  .wrap{max-width:1180px;margin:0 auto;padding:20px 16px 80px}
+  .wrap{max-width:1200px;margin:0 auto;padding:20px 16px 80px}
 
-  /* Header (Uber-style) */
-  .hero{position:relative;height:200px;border-radius:16px;overflow:hidden;background:url('https://loremflickr.com/1200/400/mala,xiang,guo,szechuan') center/cover;margin-bottom:18px}
-  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0008 0%,#000d 100%)}
-  .hero-body{position:absolute;left:18px;bottom:14px;right:18px;z-index:2}
-  .hero h1{margin:0;font-size:28px;font-weight:800;letter-spacing:-.02em}
-  .hero .meta{color:var(--dim);font-size:13px;margin-top:4px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-  .hero .meta b{color:var(--gold)}
-  .hero .badge{display:inline-block;background:#000a;border:1px solid var(--gold);color:var(--gold);padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700}
+  header{border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:8px}
+  .title{font-size:28px;font-weight:800;letter-spacing:-.02em}
+  .title .cn{color:var(--hot);font-weight:600;margin-left:6px}
+  .sub{color:var(--dim);font-size:13px;margin-top:8px;line-height:1.6}
+  .sub a.order{display:inline-block;background:#06c167;color:#000;padding:7px 14px;border-radius:999px;font-weight:800;font-size:12px;margin-left:6px}
 
-  .order-btn{display:inline-flex;align-items:center;gap:8px;background:#06c167;color:#000;padding:10px 16px;border-radius:999px;font-weight:800;font-size:14px;margin-top:10px}
-  .order-btn:hover{background:#05b35a;text-decoration:none}
+  h2{font-size:22px;margin:34px 0 14px;display:flex;align-items:baseline;gap:10px;border-left:5px solid var(--hot);padding-left:12px}
+  h2 .cnt{font-size:13px;color:var(--mute);font-weight:400}
 
-  /* Section */
-  h2{font-size:20px;margin:32px 0 14px;display:flex;align-items:center;gap:10px;border-left:4px solid var(--hot);padding-left:10px}
-  h2 .cnt{font-size:12px;color:var(--mute);font-weight:400}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--dim);margin:0 0 12px}
+  .legend b{color:var(--ink)}
 
-  /* Menu item (Uber-style row) */
-  .menu-row{display:grid;grid-template-columns:1fr 130px;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px;align-items:center;transition:border-color .15s,transform .15s}
-  .menu-row:hover{border-color:var(--hot);transform:translateY(-1px)}
-  .menu-row .info .name{font-size:17px;font-weight:800;letter-spacing:-.01em}
-  .menu-row .info .cn{color:var(--hot2);font-size:13px;margin-top:3px}
-  .menu-row .info .desc{color:var(--dim);font-size:13px;margin-top:6px;line-height:1.5}
-  .menu-row .info .price{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
-  .menu-row .info .price .lb{background:var(--panel2);border:1px solid var(--line);padding:5px 9px;border-radius:8px;font-size:12px}
-  .menu-row .info .price .lb b{color:var(--gold)}
-  .menu-row .info .price .lb.rec{border-color:var(--gold);background:#3a2a10}
-  .menu-row .photo{width:130px;height:130px;border-radius:12px;background-size:cover;background-position:center;background-color:#3a2018;position:relative}
-  .menu-row .photo .emoji{position:absolute;bottom:6px;right:6px;font-size:22px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}
+  /* Calorie chip system */
+  .kcal-line{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;font-size:11px;align-items:center}
+  .kc{background:var(--gold);color:#2a1a08;padding:3px 8px;border-radius:6px;font-weight:800}
+  .kc-equiv{display:flex;gap:5px}
+  .kc-equiv span{background:var(--panel2);border:1px solid var(--line);padding:2px 6px;border-radius:5px;color:var(--dim);font-size:11px}
+  .kc-equiv span b{color:var(--ink)}
 
-  /* Ingredient grid (재료 카드) */
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;position:relative;transition:transform .15s,border-color .15s}
+  /* MAIN DISH (large feature card) */
+  .main-row{display:grid;grid-template-columns:200px 1fr;gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px;align-items:stretch;transition:border-color .15s,transform .15s}
+  .main-row:hover{border-color:var(--hot);transform:translateY(-1px)}
+  .main-row.gold{border-color:var(--gold)}
+  .main-row .photo{width:200px;height:200px;border-radius:12px;background-size:cover;background-position:center;background-color:#3a2018;flex-shrink:0}
+  .main-row .info{display:flex;flex-direction:column;justify-content:space-between}
+  .main-row .name{font-size:22px;font-weight:800;letter-spacing:-.01em;line-height:1.15}
+  .main-row .name .star{color:var(--gold);font-size:18px;margin-left:6px}
+  .main-row .cn{color:var(--hot2);font-size:14px;margin-top:4px}
+  .main-row .ko{color:var(--dim);font-size:13px;margin-top:2px}
+  .main-row .desc{color:var(--dim);font-size:13px;margin-top:8px;line-height:1.55}
+  .main-row .lbs{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
+  .main-row .lb{background:var(--panel2);border:1px solid var(--line);padding:6px 10px;border-radius:8px;font-size:12px}
+  .main-row .lb b{color:var(--gold)}
+  .main-row .lb.rec{border-color:var(--gold);background:#3a2a10}
+
+  /* Side dish / drink card */
+  .side-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+  .side-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;transition:border-color .15s,transform .15s}
+  .side-card:hover{border-color:var(--hot);transform:translateY(-1px)}
+  .side-card .photo{width:120px;height:140px;background-size:cover;background-position:center;background-color:#3a2018;flex-shrink:0}
+  .side-card .info{padding:12px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
+  .side-card .name{font-size:16px;font-weight:800;line-height:1.2}
+  .side-card .cn{color:var(--hot2);font-size:12px;margin-top:3px}
+  .side-card .ko{color:var(--dim);font-size:12px;margin-top:1px}
+  .side-card .price{margin-top:8px;color:var(--gold);font-weight:800;font-size:14px}
+
+  /* Ingredient card */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;position:relative;transition:transform .15s,border-color .15s;display:flex;flex-direction:column}
   .card:hover{transform:translateY(-2px);border-color:var(--hot)}
-  .card .photo{width:100%;height:100px;background-size:cover;background-position:center;background-color:#3a2018;position:relative;display:flex;align-items:flex-end;justify-content:flex-end;padding:6px}
-  .card .photo .emoji{font-size:28px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}
-  .card .cbody{padding:8px 10px 10px}
-  .card .ko{font-weight:700;font-size:14px;line-height:1.2}
-  .card .cn{color:var(--hot2);font-size:12px;margin-top:2px}
-  .card .en{color:var(--mute);font-size:10px;margin-top:1px;font-style:italic}
-  .card .note{font-size:10px;color:var(--gold);padding:4px 10px 0;line-height:1.3}
-  .card .badge{position:absolute;top:6px;left:6px;font-size:10px;padding:2px 6px;border-radius:5px;background:var(--hot);color:#fff;font-weight:700;z-index:2;box-shadow:0 1px 4px rgba(0,0,0,.4)}
-  .card .badge.rec{background:var(--gold);color:#2a1a08}
-  .card .badge.veg{background:var(--green);color:#0a1a0a}
+  .photo{width:100%;height:140px;background:#fff;background-size:contain;background-position:center;background-repeat:no-repeat;position:relative}
+  .photo.cover{background-size:cover}
+  .badge{position:absolute;top:8px;left:8px;font-size:10px;padding:3px 7px;border-radius:6px;background:var(--hot);color:#fff;font-weight:700;z-index:2;box-shadow:0 1px 4px rgba(0,0,0,.4)}
+  .badge.rec{background:var(--gold);color:#2a1a08}
+  .badge.veg{background:var(--green);color:#0a1a0a}
+  .cbody{padding:10px 12px 12px;display:flex;flex-direction:column;flex:1}
+  .en{font-size:18px;font-weight:800;letter-spacing:-.01em;line-height:1.15;color:var(--ink)}
+  .ko-name{font-size:13px;color:var(--dim);margin-top:3px;font-weight:600}
+  .cn-name{font-size:11px;color:var(--hot2);margin-top:1px}
+  .benefit{font-size:11px;color:var(--gold);margin-top:8px;line-height:1.45;background:#2a1810;border-left:3px solid var(--gold);padding:5px 7px;border-radius:4px}
 
-  /* Combo cards (취향별) */
-  .combo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
-  .combo-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;position:relative}
-  .combo-card.gold{border-color:var(--gold)}
-  .combo-photo{width:100%;height:140px;background-size:cover;background-position:center;background-color:#3a2018;position:relative}
-  .combo-photo .lb{position:absolute;top:10px;right:10px;background:#000c;color:#fff;padding:5px 10px;border-radius:8px;font-weight:700;font-size:12px;border:1px solid var(--gold)}
-  .combo-card .title-row{padding:12px 14px 4px;display:flex;align-items:center;justify-content:space-between;gap:8px}
-  .combo-card .title-row .tname{font-size:17px;font-weight:800}
-  .combo-card .title-row .lvl{background:var(--hot);color:#fff;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700}
-  .combo-card .title-row .lvl.cool{background:var(--blue);color:#031624}
-  .combo-card .title-row .lvl.veg{background:var(--green);color:#062406}
-  .combo-card .desc{font-size:12px;color:var(--mute);padding:0 14px 8px}
-  .combo-card ul{margin:0;padding:0 14px 12px 32px;font-size:13px;line-height:1.7}
-  .combo-card .meta{padding:10px 14px 14px;font-size:12px;color:var(--gold);border-top:1px dashed var(--line);margin-top:4px}
-
-  /* Spice levels */
-  .spice{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
-  .spice .l{padding:8px 12px;border-radius:8px;background:var(--panel);border:1px solid var(--line);font-size:12px}
-  .spice .l b{color:var(--hot)}
-  .spice .l.rec{border-color:var(--gold);background:#3a2a10}
-
-  /* Tip box */
-  .tip{background:linear-gradient(135deg,#2a1410,#241410);border:1px solid var(--hot);border-radius:14px;padding:16px 18px;margin-top:24px}
-  .tip h3{margin:0 0 10px;font-size:15px;color:var(--gold)}
-  .tip ul{margin:0;padding-left:18px;font-size:14px;line-height:1.7;color:var(--ink)}
-  .tip li b{color:var(--hot2)}
-
-  footer{margin-top:40px;color:var(--mute);font-size:11px;text-align:center;line-height:1.6}
+  footer{margin-top:40px;color:var(--mute);font-size:11px;text-align:center;line-height:1.7}
 
   @media(max-width:540px){
-    .hero{height:170px}
-    .hero h1{font-size:22px}
-    .menu-row{grid-template-columns:1fr;gap:10px}
-    .menu-row .photo{width:100%;height:160px}
-    .grid{grid-template-columns:repeat(2,1fr);gap:8px}
+    .main-row{grid-template-columns:1fr;gap:12px}
+    .main-row .photo{width:100%;height:200px}
+    .side-card{flex-direction:column}
+    .side-card .photo{width:100%;height:140px}
+    .grid{grid-template-columns:repeat(2,1fr);gap:10px}
+    .photo{height:120px}
+    .en{font-size:15px}
+    .title{font-size:22px}
   }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-body">
-      <h1>마라미니 <span style="color:var(--hot)">麻辣mini</span></h1>
-      <div class="meta">
-        <span class="badge">⭐ 4.8 (320+)</span>
-        <span>138 W Central Blvd, Palisades Park NJ</span>
-        <span><b>Uber Eats</b> · LB 무게 주문</span>
-      </div>
-      <a class="order-btn" href="https://www.ubereats.com/store/mala-mini/H9lcNNhIUOK40fKiEwDv5w" target="_blank">🛵 Uber Eats 주문 →</a>
-    </div>
+<header>
+  <div class="title">마라미니 비주얼 메뉴 <span class="cn">Mala Mini · 麻辣mini</span></div>
+  <div class="sub">
+    📍 138 W Central Blvd, Palisades Park NJ · ⭐ 4.8 (320+) <br/>
+    칼로리는 100g/1인분 기준 · <b style="color:var(--ink)">🍚 밥 1공기 = 300 kcal</b> · <b style="color:var(--ink)">🥤 콜라 1캔 = 140 kcal</b> 환산
+    <a class="order" href="https://www.ubereats.com/store/mala-mini/H9lcNNhIUOK40fKiEwDv5w" target="_blank">🛵 Uber Eats →</a>
   </div>
+</header>
 
-  <div style="color:var(--dim);font-size:13px;line-height:1.6;margin-bottom:10px">
-    📸 우버이츠 페이지엔 사진이 없어서 못 알아보기에, 메뉴에 비슷한 사진 입혀서 만든 비주얼 가이드.
-    가격은 우버이츠 실제 가격 · 매운맛 단계와 자주 먹는 조합은 아래 참고.
-  </div>
+<!-- ====== MAIN DISH ====== -->
+<h2>🔥 메인 메뉴 <span class="cnt">麻辣类 · LB 무게 주문</span></h2>
 
-  <!-- ⭐ 메인 메뉴 (우버이츠 실제) -->
-  <h2>🔥 메인 메뉴 <span class="cnt">麻辣类 · LB 무게 주문</span></h2>
-
-  <div class="menu-row">
-    <div class="info">
-      <div class="name">Spicy Stir-fry Pot · 마라샹궈 <span style="color:var(--gold)">⭐</span></div>
+<div class="main-row gold">
+  <div class="photo" style="background-image:url('https://loremflickr.com/600/600/mala-xiang-guo,szechuan-stir-fry?lock=21')"></div>
+  <div class="info">
+    <div>
+      <div class="name">Spicy Stir-fry Pot <span class="star">⭐</span></div>
       <div class="cn">麻辣香锅 má là xiāng guō</div>
-      <div class="desc">국물 없이 매콤하게 볶은 한 그릇. 재료 골라서 무게로 주문. <b style="color:var(--ink)">마라미니 시그니처.</b></div>
-      <div class="price">
+      <div class="ko">마라샹궈 · 국물 X · 매콤 볶음 · 시그니처</div>
+      <div class="desc">재료 골라서 볶은 한 그릇. 분모자·차돌박이·청경채 무조건 픽.</div>
+    </div>
+    <div>
+      <div class="lbs">
         <div class="lb"><b>1 LB</b> $19.99</div>
         <div class="lb rec"><b>1.5 LB</b> $29.99 ⭐</div>
         <div class="lb"><b>2 LB</b> $39.98</div>
         <div class="lb"><b>2.5 LB</b> $49.98</div>
       </div>
+      <div class="kcal-line">
+        <span class="kc">1 LB ≈ 1,200 kcal</span>
+        <span class="kc-equiv">
+          <span>🍚 밥 <b>4</b>공기</span>
+          <span>🥤 콜라 <b>8.5</b>캔</span>
+        </span>
+      </div>
     </div>
-    <div class="photo" style="background-image:url('https://loremflickr.com/400/400/mala,xiang,guo,stir-fry')"><span class="emoji">🥘</span></div>
   </div>
+</div>
 
-  <div class="menu-row">
-    <div class="info">
-      <div class="name">House Malatang · 하우스 마라탕</div>
+<div class="main-row">
+  <div class="photo" style="background-image:url('https://loremflickr.com/600/600/malatang,spicy-soup-chinese?lock=22')"></div>
+  <div class="info">
+    <div>
+      <div class="name">House Malatang</div>
       <div class="cn">麻辣烫 má là tàng</div>
-      <div class="desc">매콤한 마라 국물에 재료 듬뿍. 매운 거 좋아하면 국물까지 다 마실 수 있는 시그니처 베이스.</div>
-      <div class="price">
+      <div class="ko">하우스 마라탕 · 국물 있음 · 깊은 마라향</div>
+      <div class="desc">매콤 국물 마라탕. 국물까지 마시는 매니아 픽.</div>
+    </div>
+    <div>
+      <div class="lbs">
         <div class="lb"><b>1 LB</b> $18.74</div>
-        <div class="lb rec"><b>1.5 LB</b> $28.11 ⭐</div>
+        <div class="lb rec"><b>1.5 LB</b> $28.11</div>
         <div class="lb"><b>2 LB</b> $37.48</div>
         <div class="lb"><b>2.5 LB</b> $46.85</div>
       </div>
+      <div class="kcal-line">
+        <span class="kc">1 LB ≈ 800 kcal</span>
+        <span class="kc-equiv">
+          <span>🍚 밥 <b>2.7</b>공기</span>
+          <span>🥤 콜라 <b>5.7</b>캔</span>
+        </span>
+      </div>
     </div>
-    <div class="photo" style="background-image:url('https://loremflickr.com/400/400/malatang,soup,spicy')"><span class="emoji">🍲</span></div>
   </div>
+</div>
 
-  <div class="menu-row">
-    <div class="info">
-      <div class="name">Original Malatang · 사천 화궈</div>
+<div class="main-row">
+  <div class="photo" style="background-image:url('https://loremflickr.com/600/600/sichuan-hotpot,red-oil?lock=23')"></div>
+  <div class="info">
+    <div>
+      <div class="name">Original Malatang</div>
       <div class="cn">四川火锅 sì chuān huǒ guō</div>
-      <div class="desc">전통 사천식. 묵직한 향신료. 매니아용. 가성비 ↑.</div>
-      <div class="price">
+      <div class="ko">사천 화궈 · 전통 묵직한 향신료</div>
+      <div class="desc">전통 사천식. 매니아용. 가성비 ↑.</div>
+    </div>
+    <div>
+      <div class="lbs">
         <div class="lb"><b>1 LB</b> $17.49</div>
         <div class="lb"><b>1.5 LB</b> $26.24</div>
       </div>
+      <div class="kcal-line">
+        <span class="kc">1 LB ≈ 750 kcal</span>
+        <span class="kc-equiv">
+          <span>🍚 밥 <b>2.5</b>공기</span>
+          <span>🥤 콜라 <b>5.4</b>캔</span>
+        </span>
+      </div>
     </div>
-    <div class="photo" style="background-image:url('https://loremflickr.com/400/400/sichuan,hotpot,red,oil')"><span class="emoji">🌶️</span></div>
   </div>
+</div>
 
-  <!-- 사이드 -->
-  <h2>🥟 사이드 메뉴 <span class="cnt">主食 · Sides</span></h2>
+<!-- ====== SIDE ====== -->
+<h2>🥟 사이드 메뉴 <span class="cnt">主食类 · Sides</span></h2>
+<div class="side-grid">
 
-  <div class="menu-row">
+  <div class="side-card">
+    <div class="photo" style="background-image:url('https://loremflickr.com/400/400/sweet-sour-pork,guobaorou?lock=31')"></div>
     <div class="info">
-      <div class="name">꿔바로우 · Sweet & Sour Pork <span style="color:var(--gold)">⭐</span></div>
-      <div class="cn">锅包肉 guō bāo ròu</div>
-      <div class="desc">바삭한 탕수육의 중국 버전. 마라랑 무조건 같이 시키는 국룰 사이드.</div>
-      <div class="price"><div class="lb rec"><b>12 pcs</b> $19.99</div></div>
+      <div>
+        <div class="name">Sweet & Sour Pork ⭐</div>
+        <div class="cn">锅包肉 guō bāo ròu</div>
+        <div class="ko">꿔바로우 · 12 pcs</div>
+      </div>
+      <div>
+        <div class="price">$19.99</div>
+        <div class="kcal-line">
+          <span class="kc">~1,200 kcal</span>
+          <span class="kc-equiv">
+            <span>🍚 <b>4</b>공기</span>
+            <span>🥤 <b>8.5</b>캔</span>
+          </span>
+        </div>
+      </div>
     </div>
-    <div class="photo" style="background-image:url('https://loremflickr.com/400/400/sweet,sour,pork,crispy')"><span class="emoji">🍖</span></div>
   </div>
 
-  <div class="menu-row">
+  <div class="side-card">
+    <div class="photo" style="background-image:url('https://loremflickr.com/400/400/fried-steamed-bun,mantou?lock=32')"></div>
     <div class="info">
-      <div class="name">튀긴 꽃빵 · Fried Steamed Bun <span style="color:var(--gold)">⭐</span></div>
-      <div class="cn">炸馒头 zhá mán tóu</div>
-      <div class="desc">겉바속촉 튀긴 빵. 연유 찍어 먹으면 끝. 매운 거 먹다 입 식힐 때.</div>
-      <div class="price"><div class="lb rec"><b>8 pcs</b> $13.74</div></div>
+      <div>
+        <div class="name">Fried Steamed Bun ⭐</div>
+        <div class="cn">炸馒头 zhá mán tóu</div>
+        <div class="ko">튀긴 꽃빵 · 8 pcs · 연유 ON</div>
+      </div>
+      <div>
+        <div class="price">$13.74</div>
+        <div class="kcal-line">
+          <span class="kc">~1,600 kcal</span>
+          <span class="kc-equiv">
+            <span>🍚 <b>5.3</b>공기</span>
+            <span>🥤 <b>11.4</b>캔</span>
+          </span>
+        </div>
+      </div>
     </div>
-    <div class="photo" style="background-image:url('https://loremflickr.com/400/400/fried,steamed,bun,golden')"><span class="emoji">🍞</span></div>
   </div>
 
-  <div class="menu-row">
+  <div class="side-card">
+    <div class="photo" style="background-image:url('https://loremflickr.com/400/400/beef-fried-rice?lock=33')"></div>
     <div class="info">
-      <div class="name">소시지 볶음밥 · Fatty Beef Fried Rice</div>
-      <div class="cn">肥牛炒饭 féi niú chǎo fàn</div>
-      <div class="desc">든든한 한 끼. 마라샹궈 1 LB + 볶음밥 1 = 2인 만찬.</div>
-      <div class="price"><div class="lb"><b>1 portion</b> $21.24</div></div>
+      <div>
+        <div class="name">Fatty Beef Fried Rice</div>
+        <div class="cn">肥牛炒饭 féi niú chǎo fàn</div>
+        <div class="ko">소고기 볶음밥</div>
+      </div>
+      <div>
+        <div class="price">$21.24</div>
+        <div class="kcal-line">
+          <span class="kc">~900 kcal</span>
+          <span class="kc-equiv">
+            <span>🍚 <b>3</b>공기</span>
+            <span>🥤 <b>6.4</b>캔</span>
+          </span>
+        </div>
+      </div>
     </div>
-    <div class="photo" style="background-image:url('https://loremflickr.com/400/400/beef,fried,rice')"><span class="emoji">🍚</span></div>
   </div>
 
-  <div class="menu-row">
+  <div class="side-card">
+    <div class="photo" style="background-image:url('https://loremflickr.com/400/400/cold-noodle,sesame-sauce?lock=34')"></div>
     <div class="info">
-      <div class="name">콜드 누들 · Cold Noodle</div>
-      <div class="cn">凉面 liáng miàn</div>
-      <div class="desc">매운맛 잠재울 차가운 면. 여름에 좋음.</div>
-      <div class="price"><div class="lb"><b>1 portion</b> $18.74</div></div>
+      <div>
+        <div class="name">Cold Noodle</div>
+        <div class="cn">凉面 liáng miàn</div>
+        <div class="ko">콜드 누들 · 매운 거 잠재우기</div>
+      </div>
+      <div>
+        <div class="price">$18.74</div>
+        <div class="kcal-line">
+          <span class="kc">~600 kcal</span>
+          <span class="kc-equiv">
+            <span>🍚 <b>2</b>공기</span>
+            <span>🥤 <b>4.3</b>캔</span>
+          </span>
+        </div>
+      </div>
     </div>
-    <div class="photo" style="background-image:url('https://loremflickr.com/400/400/cold,noodle,sesame')"><span class="emoji">🍜</span></div>
   </div>
 
-  <!-- 음료 -->
-  <h2>🥤 음료 <span class="cnt">饮料 · Drinks</span></h2>
+</div>
 
-  <div class="menu-row">
+<!-- ====== DRINK ====== -->
+<h2>🥤 음료 <span class="cnt">饮料 · Drinks</span></h2>
+<div class="side-grid">
+
+  <div class="side-card">
+    <div class="photo" style="background-image:url('https://loremflickr.com/400/400/bubble-tea,boba?lock=41')"></div>
     <div class="info">
-      <div class="name">버블티 · Boba Milk Tea</div>
-      <div class="cn">奶茶 nǎi chá</div>
-      <div class="desc">매운 거 진정용. 매니아면 무조건.</div>
-      <div class="price"><div class="lb"><b>1 cup</b> $5.00</div></div>
+      <div>
+        <div class="name">Boba Milk Tea</div>
+        <div class="cn">奶茶 nǎi chá</div>
+        <div class="ko">버블티 · 매운맛 진정</div>
+      </div>
+      <div>
+        <div class="price">$5.00</div>
+        <div class="kcal-line">
+          <span class="kc">~350 kcal</span>
+          <span class="kc-equiv">
+            <span>🍚 <b>1.2</b>공기</span>
+            <span>🥤 <b>2.5</b>캔</span>
+          </span>
+        </div>
+      </div>
     </div>
-    <div class="photo" style="background-image:url('https://loremflickr.com/400/400/bubble,tea,boba')"><span class="emoji">🧋</span></div>
   </div>
 
-  <div class="menu-row">
+  <div class="side-card">
+    <div class="photo" style="background-image:url('https://loremflickr.com/400/400/milk-drink?lock=42')"></div>
     <div class="info">
-      <div class="name">우유 음료 · Milk Drink</div>
-      <div class="cn">奶饮 nǎi yǐn</div>
-      <div class="desc">단맛 + 우유 = 매운 거 잠재우기 최강.</div>
-      <div class="price"><div class="lb"><b>1 cup</b> $4.38</div></div>
+      <div>
+        <div class="name">Milk Drink</div>
+        <div class="cn">奶饮 nǎi yǐn</div>
+        <div class="ko">우유 음료 · 입천장 구조용</div>
+      </div>
+      <div>
+        <div class="price">$4.38</div>
+        <div class="kcal-line">
+          <span class="kc">~250 kcal</span>
+          <span class="kc-equiv">
+            <span>🍚 <b>0.8</b>공기</span>
+            <span>🥤 <b>1.8</b>캔</span>
+          </span>
+        </div>
+      </div>
     </div>
-    <div class="photo" style="background-image:url('https://loremflickr.com/400/400/milk,drink,cup')"><span class="emoji">🥛</span></div>
   </div>
 
-  <!-- ⭐ 자주 시키는 조합 -->
-  <h2>⭐ 자주 시키는 조합 <span class="cnt">취향별 · 우버이츠 실가격 기준</span></h2>
-  <div class="combo-grid">
+</div>
 
-    <div class="combo-card gold">
-      <div class="combo-photo" style="background-image:url('https://loremflickr.com/600/280/mala,xiang,guo,couple,share')"><div class="lb">⭐ 1.5 LB</div></div>
-      <div class="title-row"><div class="tname">와이프랑 공유 (추천)</div><span class="lvl">中辣</span></div>
-      <div class="desc">2인 셰어 끝판왕 · 밸런스 좋음</div>
-      <ul>
-        <li>마라샹궈 <b style="color:var(--gold)">1.5 LB $29.99</b></li>
-        <li>+ 꿔바로우 12pc $19.99</li>
-        <li>+ 꽃빵 8pc $13.74</li>
-      </ul>
-      <div class="meta">💰 합계 약 <b style="color:var(--ink)">$63.72</b> (배달료 별도) · 2인 든든 만찬</div>
+<!-- ====== INGREDIENT (재료 가이드) ====== -->
+<h2>🥢 재료 가이드 <span class="cnt">100g 기준 · 사진 + 효능 + 칼로리</span></h2>
+<div class="legend">
+  <span><b style="color:var(--gold)">⭐</b> 베스트픽</span>
+  <span><b style="color:var(--hot)">🔥</b> 마라 잘 흡수</span>
+  <span><b style="color:var(--green)">🌱</b> 야채 (가벼움)</span>
+</div>
+
+<h3 style="font-size:15px;color:var(--gold);margin:22px 0 10px">🥩 고기 · 해산물 <span style="color:var(--mute);font-weight:400;font-size:12px">Meat &amp; Seafood</span></h3>
+<div class="grid">
+
+  <div class="card">
+    <div class="photo" style="background-image:url('https://www.themealdb.com/images/ingredients/Beef%20Brisket.png')">
+      <span class="badge rec">⭐</span>
     </div>
-
-    <div class="combo-card">
-      <div class="combo-photo" style="background-image:url('https://loremflickr.com/600/280/spicy,beef,wok,lamb')"><div class="lb">🥩 1 LB</div></div>
-      <div class="title-row"><div class="tname">고기 마니아 1인</div><span class="lvl">中辣</span></div>
-      <div class="desc">혼밥 · 고기 위주</div>
-      <ul>
-        <li>마라샹궈 <b style="color:var(--gold)">1 LB $19.99</b></li>
-        <li>+ 꽃빵 8pc $13.74</li>
-      </ul>
-      <div class="meta">💰 합계 약 <b style="color:var(--ink)">$33.73</b> · 1인 든든</div>
+    <div class="cbody">
+      <div class="en">Beef Brisket</div>
+      <div class="ko-name">차돌박이</div>
+      <div class="cn-name">肥牛 féi niú</div>
+      <div class="benefit">단백질·철분 · <b>마라 흡수 최강</b></div>
+      <div class="kcal-line"><span class="kc">250 kcal</span><span class="kc-equiv"><span>🍚<b>0.8</b></span><span>🥤<b>1.8</b></span></span></div>
     </div>
+  </div>
 
-    <div class="combo-card">
-      <div class="combo-photo" style="background-image:url('https://loremflickr.com/600/280/seafood,shrimp,squid,wok')"><div class="lb">🦐 1 LB</div></div>
-      <div class="title-row"><div class="tname">해산물 가벼이</div><span class="lvl cool">小辣</span></div>
-      <div class="desc">덜 매콤하게 · 해산물 위주</div>
-      <ul>
-        <li>마라샹궈 <b style="color:var(--gold)">1 LB $19.99</b></li>
-        <li>+ 콜드 누들 $18.74</li>
-      </ul>
-      <div class="meta">💰 합계 약 <b style="color:var(--ink)">$38.73</b> · 1-2인 가볍게</div>
+  <div class="card">
+    <div class="photo" style="background-image:url('https://www.themealdb.com/images/ingredients/Lamb.png')">
+      <span class="badge rec">⭐</span>
     </div>
-
-    <div class="combo-card">
-      <div class="combo-photo" style="background-image:url('https://loremflickr.com/600/280/vegetable,mushroom,bok-choy,tofu')"><div class="lb">🌱 1 LB</div></div>
-      <div class="title-row"><div class="tname">채식 비중</div><span class="lvl veg">中辣</span></div>
-      <div class="desc">가성비 · 야채 위주 가벼움</div>
-      <ul>
-        <li>마라샹궈 <b style="color:var(--gold)">1 LB $19.99</b></li>
-        <li>+ 버블티 $5.00</li>
-      </ul>
-      <div class="meta">💰 합계 약 <b style="color:var(--ink)">$24.99</b> · 가성비</div>
+    <div class="cbody">
+      <div class="en">Lamb</div>
+      <div class="ko-name">양고기</div>
+      <div class="cn-name">羊肉 yáng ròu</div>
+      <div class="benefit">철분·아연 · <b>정통 마라향</b></div>
+      <div class="kcal-line"><span class="kc">294 kcal</span><span class="kc-equiv"><span>🍚<b>1.0</b></span><span>🥤<b>2.1</b></span></span></div>
     </div>
+  </div>
 
-    <div class="combo-card">
-      <div class="combo-photo" style="background-image:url('https://loremflickr.com/600/280/sichuan,red,chili,oil,extreme')"><div class="lb">🔥 1.5 LB</div></div>
-      <div class="title-row"><div class="tname">매운 거 강자</div><span class="lvl">大辣</span></div>
-      <div class="desc">땀 흘리고 싶을 때</div>
-      <ul>
-        <li>마라샹궈 <b style="color:var(--gold)">1.5 LB $29.99</b></li>
-        <li>+ 우유 음료 $4.38 (입천장 구조용)</li>
-      </ul>
-      <div class="meta">💰 합계 약 <b style="color:var(--ink)">$34.37</b> · 음료 필수</div>
+  <div class="card">
+    <div class="photo cover" style="background-image:url('https://loremflickr.com/400/300/pork-belly,sliced?lock=11')"></div>
+    <div class="cbody">
+      <div class="en">Pork Belly</div>
+      <div class="ko-name">삼겹살</div>
+      <div class="cn-name">五花肉 wǔ huā ròu</div>
+      <div class="benefit">비타민 B1 · 진한 풍미 · 든든</div>
+      <div class="kcal-line"><span class="kc">518 kcal</span><span class="kc-equiv"><span>🍚<b>1.7</b></span><span>🥤<b>3.7</b></span></span></div>
     </div>
+  </div>
 
-    <div class="combo-card">
-      <div class="combo-photo" style="background-image:url('https://loremflickr.com/600/280/family,chinese,share,plenty')"><div class="lb">👨‍👩‍👧 2.5 LB</div></div>
-      <div class="title-row"><div class="tname">3-4인 패밀리</div><span class="lvl">中辣</span></div>
-      <div class="desc">손님 초대 / 가족 모임</div>
-      <ul>
-        <li>마라샹궈 <b style="color:var(--gold)">2.5 LB $49.98</b></li>
-        <li>+ 꿔바로우 12pc $19.99</li>
-        <li>+ 꽃빵 8pc $13.74</li>
-        <li>+ 볶음밥 $21.24</li>
-      </ul>
-      <div class="meta">💰 합계 약 <b style="color:var(--ink)">$104.95</b> · 3-4인 잔치</div>
+  <div class="card">
+    <div class="photo" style="background-image:url('https://www.themealdb.com/images/ingredients/Chicken.png')"></div>
+    <div class="cbody">
+      <div class="en">Chicken Thigh</div>
+      <div class="ko-name">닭다리살</div>
+      <div class="cn-name">鸡腿肉 jī tuǐ ròu</div>
+      <div class="benefit">단백질 · 부드러운 식감</div>
+      <div class="kcal-line"><span class="kc">209 kcal</span><span class="kc-equiv"><span>🍚<b>0.7</b></span><span>🥤<b>1.5</b></span></span></div>
     </div>
-
   </div>
 
-  <!-- 들어가는 재료 미리보기 -->
-  <h2>🥢 들어가는 재료 미리보기 <span class="cnt">진열대 / 우버에선 자동 셀렉</span></h2>
-
-  <h3 style="font-size:14px;color:var(--gold);margin:18px 0 8px">고기 · 海鲜</h3>
-  <div class="grid">
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/beef,brisket,sliced')"><span class="emoji">🥩</span></div><span class="badge rec">⭐</span><div class="cbody"><div class="ko">차돌박이</div><div class="cn">肥牛</div><div class="en">brisket</div></div><div class="note">마라 흡수 최강</div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/lamb,meat')"><span class="emoji">🐑</span></div><span class="badge rec">⭐</span><div class="cbody"><div class="ko">양고기</div><div class="cn">羊肉</div><div class="en">lamb</div></div><div class="note">정통 마라향</div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/pork,belly')"><span class="emoji">🐖</span></div><div class="cbody"><div class="ko">삼겹살</div><div class="cn">五花肉</div><div class="en">pork belly</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/spam,luncheon')"><span class="emoji">🥫</span></div><div class="cbody"><div class="ko">스팸</div><div class="cn">午餐肉</div><div class="en">spam</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/sausage,vienna')"><span class="emoji">🌭</span></div><div class="cbody"><div class="ko">비엔나</div><div class="cn">香肠</div><div class="en">sausage</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/shrimp')"><span class="emoji">🦐</span></div><span class="badge">🔥</span><div class="cbody"><div class="ko">새우</div><div class="cn">虾</div><div class="en">shrimp</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/squid,calamari')"><span class="emoji">🦑</span></div><div class="cbody"><div class="ko">오징어</div><div class="cn">鱿鱼</div><div class="en">squid</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/fishcake,fishball')"><span class="emoji">🍥</span></div><div class="cbody"><div class="ko">어묵</div><div class="cn">鱼丸</div><div class="en">fish ball</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/crab,stick')"><span class="emoji">🦀</span></div><div class="cbody"><div class="ko">게맛살</div><div class="cn">蟹棒</div><div class="en">crab stick</div></div></div>
+  <div class="card">
+    <div class="photo" style="background-image:url('https://www.themealdb.com/images/ingredients/Bacon.png')"></div>
+    <div class="cbody">
+      <div class="en">Bacon</div>
+      <div class="ko-name">베이컨</div>
+      <div class="cn-name">培根 péi gēn</div>
+      <div class="benefit">짭짤 감칠맛 · 기름 풍미</div>
+      <div class="kcal-line"><span class="kc">541 kcal</span><span class="kc-equiv"><span>🍚<b>1.8</b></span><span>🥤<b>3.9</b></span></span></div>
+    </div>
   </div>
 
-  <h3 style="font-size:14px;color:var(--gold);margin:22px 0 8px">버섯 · 蔬菜</h3>
-  <div class="grid">
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/enoki,mushroom')"><span class="emoji">🍄</span></div><span class="badge rec">⭐</span><div class="cbody"><div class="ko">팽이버섯</div><div class="cn">金针菇</div><div class="en">enoki</div></div><div class="note">국룰</div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/wood-ear,mushroom')"><span class="emoji">🍄</span></div><span class="badge">🔥</span><div class="cbody"><div class="ko">목이버섯</div><div class="cn">木耳</div><div class="en">wood ear</div></div><div class="note">쫄깃</div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/shiitake,mushroom')"><span class="emoji">🍄</span></div><div class="cbody"><div class="ko">표고</div><div class="cn">香菇</div><div class="en">shiitake</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/king-oyster,mushroom')"><span class="emoji">🍄</span></div><div class="cbody"><div class="ko">새송이</div><div class="cn">杏鲍菇</div><div class="en">king oyster</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/bok-choy')"><span class="emoji">🥬</span></div><span class="badge veg">🌱</span><div class="cbody"><div class="ko">청경채</div><div class="cn">青菜</div><div class="en">bok choy</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/napa,cabbage')"><span class="emoji">🥬</span></div><span class="badge veg">🌱</span><div class="cbody"><div class="ko">배추</div><div class="cn">白菜</div><div class="en">napa</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/potato,sliced')"><span class="emoji">🥔</span></div><span class="badge rec">⭐</span><div class="cbody"><div class="ko">감자</div><div class="cn">土豆</div><div class="en">potato</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/lotus,root')"><span class="emoji">🪷</span></div><div class="cbody"><div class="ko">연근</div><div class="cn">藕片</div><div class="en">lotus root</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/broccoli')"><span class="emoji">🥦</span></div><div class="cbody"><div class="ko">브로콜리</div><div class="cn">西兰花</div><div class="en">broccoli</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/corn')"><span class="emoji">🌽</span></div><div class="cbody"><div class="ko">옥수수</div><div class="cn">玉米</div><div class="en">corn</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/eggplant')"><span class="emoji">🍆</span></div><div class="cbody"><div class="ko">가지</div><div class="cn">茄子</div><div class="en">eggplant</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/green,chili')"><span class="emoji">🌶️</span></div><div class="cbody"><div class="ko">청양고추</div><div class="cn">青椒</div><div class="en">chili</div></div></div>
+  <div class="card">
+    <div class="photo" style="background-image:url('https://www.themealdb.com/images/ingredients/Sausages.png')"></div>
+    <div class="cbody">
+      <div class="en">Sausage / Vienna</div>
+      <div class="ko-name">비엔나 / 소시지</div>
+      <div class="cn-name">香肠 xiāng cháng</div>
+      <div class="benefit">아이도 OK · 짠맛 · 든든</div>
+      <div class="kcal-line"><span class="kc">296 kcal</span><span class="kc-equiv"><span>🍚<b>1.0</b></span><span>🥤<b>2.1</b></span></span></div>
+    </div>
   </div>
 
-  <h3 style="font-size:14px;color:var(--gold);margin:22px 0 8px">면 · 떡 · 두부</h3>
-  <div class="grid">
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/glass,noodle')"><span class="emoji">🍜</span></div><span class="badge rec">⭐</span><div class="cbody"><div class="ko">분모자</div><div class="cn">粉条</div><div class="en">glass noodle</div></div><div class="note">필수 · 영혼</div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/udon')"><span class="emoji">🍜</span></div><div class="cbody"><div class="ko">우동/라면</div><div class="cn">面条</div><div class="en">udon</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/korean,rice-cake')"><span class="emoji">🍢</span></div><div class="cbody"><div class="ko">떡</div><div class="cn">年糕</div><div class="en">rice cake</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/tofu,skin')"><span class="emoji">🟫</span></div><span class="badge">🔥</span><div class="cbody"><div class="ko">건두부</div><div class="cn">腐竹</div><div class="en">tofu skin</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/tofu')"><span class="emoji">⬜</span></div><div class="cbody"><div class="ko">두부</div><div class="cn">豆腐</div><div class="en">tofu</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/fried,tofu')"><span class="emoji">🟨</span></div><div class="cbody"><div class="ko">유부</div><div class="cn">豆腐皮</div><div class="en">fried tofu</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/quail,egg')"><span class="emoji">🥚</span></div><div class="cbody"><div class="ko">메추리알</div><div class="cn">鹌鹑蛋</div><div class="en">quail egg</div></div></div>
-    <div class="card"><div class="photo" style="background-image:url('https://loremflickr.com/400/280/dumpling')"><span class="emoji">🥟</span></div><div class="cbody"><div class="ko">만두</div><div class="cn">饺子</div><div class="en">dumpling</div></div></div>
+  <div class="card">
+    <div class="photo cover" style="background-image:url('https://loremflickr.com/400/300/spam,luncheon-meat?lock=7')"></div>
+    <div class="cbody">
+      <div class="en">Spam</div>
+      <div class="ko-name">스팸</div>
+      <div class="cn-name">午餐肉 wǔ cān ròu</div>
+      <div class="benefit">짠맛·감칠맛 · 마성의 픽</div>
+      <div class="kcal-line"><span class="kc">315 kcal</span><span class="kc-equiv"><span>🍚<b>1.1</b></span><span>🥤<b>2.3</b></span></span></div>
+    </div>
   </div>
 
-  <!-- 매운맛 -->
-  <h2>🌶️ 매운맛 단계 <span class="cnt">辣度</span></h2>
-  <div class="spice">
-    <div class="l"><b>微辣 wēi là</b> · 약간 매움</div>
-    <div class="l"><b>小辣 xiǎo là</b> · 조금 매움</div>
-    <div class="l rec"><b>中辣 zhōng là</b> · 보통 ⭐ 한국인 평균</div>
-    <div class="l"><b>大辣 dà là</b> · 매움</div>
-    <div class="l"><b>变态辣 biàn tài là</b> · 변태 매움</div>
+  <div class="card">
+    <div class="photo" style="background-image:url('https://www.themealdb.com/images/ingredients/Shrimp.png')">
+      <span class="badge">🔥</span>
+    </div>
+    <div class="cbody">
+      <div class="en">Shrimp</div>
+      <div class="ko-name">새우</div>
+      <div class="cn-name">虾 xiā</div>
+      <div class="benefit"><b>저칼로리 고단백</b> · 다이어트 ⭐</div>
+      <div class="kcal-line"><span class="kc">99 kcal</span><span class="kc-equiv"><span>🍚<b>0.3</b></span><span>🥤<b>0.7</b></span></span></div>
+    </div>
   </div>
 
-  <!-- 꿀팁 -->
-  <div class="tip">
-    <h3>⭐ 우버이츠 주문 꿀팁</h3>
-    <ul>
-      <li><b>2인 = 1.5 LB</b> 기본. 양 많은 편이라 1 LB 도 1인엔 든든.</li>
-      <li><b>꿔바로우 + 꽃빵</b> = 매운 마라샹궈 옆에 둘 사이드 황금 콤보.</li>
-      <li><b>분모자(粉条)</b> 옵션 있으면 무조건 ON — 마라샹궈의 영혼.</li>
-      <li><b>매운맛</b> 처음이면 <b>小辣 or 中辣</b>. 大辣부터는 음료 필수.</li>
-      <li><b>우유 음료</b>는 매운 입천장 구조용 — 물보다 효과적.</li>
-    </ul>
+  <div class="card">
+    <div class="photo" style="background-image:url('https://www.themealdb.com/images/ingredients/Squid.png')"></div>
+    <div class="cbody">
+      <div class="en">Squid</div>
+      <div class="ko-name">오징어</div>
+      <div class="cn-name">鱿鱼 yóu yú</div>
+      <div class="benefit">저칼로리 · <b>타우린</b> · 쫄깃</div>
+      <div class="kcal-line"><span class="kc">92 kcal</span><span class="kc-equiv"><span>🍚<b>0.3</b></span><span>🥤<b>0.7</b></span></span></div>
+    </div>
   </div>
 
-  <div style="text-align:center;margin:30px 0 0">
-    <a class="order-btn" href="https://www.ubereats.com/store/mala-mini/H9lcNNhIUOK40fKiEwDv5w" target="_blank">🛵 Uber Eats 에서 바로 주문 →</a>
+  <div class="card">
+    <div class="photo cover" style="background-image:url('https://loremflickr.com/400/300/imitation-crab-stick?lock=4')"></div>
+    <div class="cbody">
+      <div class="en">Crab Stick</div>
+      <div class="ko-name">게맛살</div>
+      <div class="cn-name">蟹棒 xiè bàng</div>
+      <div class="benefit">부드러운 식감 · 호불호 없음</div>
+      <div class="kcal-line"><span class="kc">95 kcal</span><span class="kc-equiv"><span>🍚<b>0.3</b></span><span>🥤<b>0.7</b></span></span></div>
+    </div>
   </div>
 
-  <footer>
-    마라미니 · 138 W Central Blvd, Palisades Park NJ · ⭐ 4.8 (320+) <br/>
-    📸 사진은 비주얼 참고용 (실제 메뉴와 다를 수 있음) · 가격은 우버이츠 기준 2026-05<br/>
-    sikdang.github.io · Generated 2026-05-23
-  </footer>
+  <div class="card">
+    <div class="photo cover" style="background-image:url('https://loremflickr.com/400/300/asian-fish-cake,fishball?lock=3')"></div>
+    <div class="cbody">
+      <div class="en">Fish Cake / Ball</div>
+      <div class="ko-name">어묵</div>
+      <div class="cn-name">鱼丸 yú wán</div>
+      <div class="benefit">쫄깃 단백질 · 국물 머금음</div>
+      <div class="kcal-line"><span class="kc">100 kcal</span><span class="kc-equiv"><span>🍚<b>0.3</b></span><span>🥤<b>0.7</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo" style="background-image:url('https://www.themealdb.com/images/ingredients/Mussels.png')"></div>
+    <div class="cbody">
+      <div class="en">Mussels</div>
+      <div class="ko-name">홍합</div>
+      <div class="cn-name">青口 qīng kǒu</div>
+      <div class="benefit">미네랄 · 깊은 감칠맛</div>
+      <div class="kcal-line"><span class="kc">86 kcal</span><span class="kc-equiv"><span>🍚<b>0.3</b></span><span>🥤<b>0.6</b></span></span></div>
+    </div>
+  </div>
+
+</div>
+
+<h3 style="font-size:15px;color:var(--gold);margin:22px 0 10px">🍄 버섯 <span style="color:var(--mute);font-weight:400;font-size:12px">Mushroom</span></h3>
+<div class="grid">
+
+  <div class="card">
+    <div class="photo cover" style="background-image:url('https://loremflickr.com/400/300/enoki-mushroom?lock=2')">
+      <span class="badge rec">⭐</span>
+    </div>
+    <div class="cbody">
+      <div class="en">Enoki</div>
+      <div class="ko-name">팽이버섯</div>
+      <div class="cn-name">金针菇 jīn zhēn gū</div>
+      <div class="benefit">식이섬유 · <b>다이어트 국룰</b></div>
+      <div class="kcal-line"><span class="kc">37 kcal</span><span class="kc-equiv"><span>🍚<b>0.1</b></span><span>🥤<b>0.3</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo cover" style="background-image:url('https://loremflickr.com/400/300/wood-ear-mushroom,black?lock=5')">
+      <span class="badge">🔥</span>
+    </div>
+    <div class="cbody">
+      <div class="en">Wood Ear</div>
+      <div class="ko-name">목이버섯</div>
+      <div class="cn-name">木耳 mù ěr</div>
+      <div class="benefit">변비 개선 · <b>쫄깃 식감</b></div>
+      <div class="kcal-line"><span class="kc">25 kcal</span><span class="kc-equiv"><span>🍚<b>0.1</b></span><span>🥤<b>0.2</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo" style="background-image:url('https://www.themealdb.com/images/ingredients/Shiitake%20Mushrooms.png')"></div>
+    <div class="cbody">
+      <div class="en">Shiitake</div>
+      <div class="ko-name">표고버섯</div>
+      <div class="cn-name">香菇 xiāng gū</div>
+      <div class="benefit">면역력 ↑ · 향 진함 · 항암</div>
+      <div class="kcal-line"><span class="kc">34 kcal</span><span class="kc-equiv"><span>🍚<b>0.1</b></span><span>🥤<b>0.2</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo cover" style="background-image:url('https://loremflickr.com/400/300/king-oyster-mushroom?lock=6')"></div>
+    <div class="cbody">
+      <div class="en">King Oyster</div>
+      <div class="ko-name">새송이</div>
+      <div class="cn-name">杏鲍菇 xìng bào gū</div>
+      <div class="benefit">식이섬유 · 두툼한 식감</div>
+      <div class="kcal-line"><span class="kc">35 kcal</span><span class="kc-equiv"><span>🍚<b>0.1</b></span><span>🥤<b>0.3</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo" style="background-image:url('https://www.themealdb.com/images/ingredients/Mushrooms.png')"></div>
+    <div class="cbody">
+      <div class="en">Button Mushroom</div>
+      <div class="ko-name">양송이</div>
+      <div class="cn-name">蘑菇 mó gū</div>
+      <div class="benefit">비타민 D · 저칼로리</div>
+      <div class="kcal-line"><span class="kc">22 kcal</span><span class="kc-equiv"><span>🍚<b>0.07</b></span><span>🥤<b>0.2</b></span></span></div>
+    </div>
+  </div>
+
+</div>
+
+<h3 style="font-size:15px;color:var(--gold);margin:22px 0 10px">🥬 채소 <span style="color:var(--mute);font-weight:400;font-size:12px">Vegetable</span></h3>
+<div class="grid">
+
+  <div class="card">
+    <div class="photo cover" style="background-image:url('https://loremflickr.com/400/300/bok-choy,greens?lock=1')">
+      <span class="badge veg">🌱</span>
+    </div>
+    <div class="cbody">
+      <div class="en">Bok Choy</div>
+      <div class="ko-name">청경채</div>
+      <div class="cn-name">青菜 qīng cài</div>
+      <div class="benefit">비타민 A·C · <b>정통 단골</b></div>
+      <div class="kcal-line"><span class="kc">13 kcal</span><span class="kc-equiv"><span>🍚<b>0.04</b></span><span>🥤<b>0.09</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo" style="background-image:url('https://www.themealdb.com/images/ingredients/Cabbage.png')">
+      <span class="badge veg">🌱</span>
+    </div>
+    <div class="cbody">
+      <div class="en">Napa Cabbage</div>
+      <div class="ko-name">배추</div>
+      <div class="cn-name">白菜 bái cài</div>
+      <div class="benefit">식이섬유 · 비타민 C</div>
+      <div class="kcal-line"><span class="kc">14 kcal</span><span class="kc-equiv"><span>🍚<b>0.05</b></span><span>🥤<b>0.1</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo" style="background-image:url('https://www.themealdb.com/images/ingredients/Bean%20Sprouts.png')"></div>
+    <div class="cbody">
+      <div class="en">Bean Sprouts</div>
+      <div class="ko-name">숙주</div>
+      <div class="cn-name">豆芽 dòu yá</div>
+      <div class="benefit">아삭 · 비타민 C · 해독</div>
+      <div class="kcal-line"><span class="kc">30 kcal</span><span class="kc-equiv"><span>🍚<b>0.1</b></span><span>🥤<b>0.2</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo" style="background-image:url('https://www.themealdb.com/images/ingredients/Potatoes.png')">
+      <span class="badge rec">⭐</span>
+    </div>
+    <div class="cbody">
+      <div class="en">Potato</div>
+      <div class="ko-name">감자</div>
+      <div class="cn-name">土豆 tǔ dòu</div>
+      <div class="benefit">탄수화물 · <b>소스 흡수 ↑</b></div>
+      <div class="kcal-line"><span class="kc">77 kcal</span><span class="kc-equiv"><span>🍚<b>0.3</b></span><span>🥤<b>0.6</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo cover" style="background-image:url('https://loremflickr.com/400/300/lotus-root,sliced?lock=8')"></div>
+    <div class="cbody">
+      <div class="en">Lotus Root</div>
+      <div class="ko-name">연근</div>
+      <div class="cn-name">藕片 ǒu piàn</div>
+      <div class="benefit">식이섬유 · <b>아삭 식감</b></div>
+      <div class="kcal-line"><span class="kc">74 kcal</span><span class="kc-equiv"><span>🍚<b>0.2</b></span><span>🥤<b>0.5</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo cover" style="background-image:url('https://loremflickr.com/400/300/bamboo-shoots?lock=9')"></div>
+    <div class="cbody">
+      <div class="en">Bamboo Shoot</div>
+      <div class="ko-name">죽순</div>
+      <div class="cn-name">笋 sǔn</div>
+      <div class="benefit">저칼로리 · 식이섬유 · 아삭</div>
+      <div class="kcal-line"><span class="kc">27 kcal</span><span class="kc-equiv"><span>🍚<b>0.09</b></span><span>🥤<b>0.2</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo" style="background-image:url('https://www.themealdb.com/images/ingredients/Broccoli.png')"></div>
+    <div class="cbody">
+      <div class="en">Broccoli</div>
+      <div class="ko-name">브로콜리</div>
+      <div class="cn-name">西兰花 xī lán huā</div>
+      <div class="benefit">비타민 C · 항산화 · 항암</div>
+      <div class="kcal-line"><span class="kc">34 kcal</span><span class="kc-equiv"><span>🍚<b>0.1</b></span><span>🥤<b>0.2</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo" style="background-image:url('https://www.themealdb.com/images/ingredients/Sweetcorn.png')"></div>
+    <div class="cbody">
+      <div class="en">Sweet Corn</div>
+      <div class="ko-name">옥수수</div>
+      <div class="cn-name">玉米 yù mǐ</div>
+      <div class="benefit">단맛 · 식이섬유 · 든든</div>
+      <div class="kcal-line"><span class="kc">86 kcal</span><span class="kc-equiv"><span>🍚<b>0.3</b></span><span>🥤<b>0.6</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo" style="background-image:url('https://www.themealdb.com/images/ingredients/Aubergine.png')"></div>
+    <div class="cbody">
+      <div class="en">Eggplant</div>
+      <div class="ko-name">가지</div>
+      <div class="cn-name">茄子 qié zi</div>
+      <div class="benefit">폴리페놀 · 항산화</div>
+      <div class="kcal-line"><span class="kc">25 kcal</span><span class="kc-equiv"><span>🍚<b>0.08</b></span><span>🥤<b>0.2</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo" style="background-image:url('https://www.themealdb.com/images/ingredients/Green%20Chilli.png')"></div>
+    <div class="cbody">
+      <div class="en">Green Chili</div>
+      <div class="ko-name">청양고추</div>
+      <div class="cn-name">青椒 qīng jiāo</div>
+      <div class="benefit">캡사이신 · <b>매운맛 강화</b></div>
+      <div class="kcal-line"><span class="kc">40 kcal</span><span class="kc-equiv"><span>🍚<b>0.1</b></span><span>🥤<b>0.3</b></span></span></div>
+    </div>
+  </div>
+
+</div>
+
+<h3 style="font-size:15px;color:var(--gold);margin:22px 0 10px">🍜 면 · 떡 · 두부 <span style="color:var(--mute);font-weight:400;font-size:12px">Carbs &amp; Tofu</span></h3>
+<div class="grid">
+
+  <div class="card">
+    <div class="photo cover" style="background-image:url('https://loremflickr.com/400/300/glass-noodle,sweet-potato?lock=10')">
+      <span class="badge rec">⭐</span>
+    </div>
+    <div class="cbody">
+      <div class="en">Glass Noodle</div>
+      <div class="ko-name">분모자</div>
+      <div class="cn-name">粉条 fěn tiáo</div>
+      <div class="benefit"><b>마라샹궈의 영혼</b> · 소스 다 흡수</div>
+      <div class="kcal-line"><span class="kc">351 kcal</span><span class="kc-equiv"><span>🍚<b>1.2</b></span><span>🥤<b>2.5</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo" style="background-image:url('https://www.themealdb.com/images/ingredients/Noodles.png')"></div>
+    <div class="cbody">
+      <div class="en">Udon / Ramen</div>
+      <div class="ko-name">우동 / 라면</div>
+      <div class="cn-name">面条 miàn tiáo</div>
+      <div class="benefit">탄수화물 · 든든 · 푸짐</div>
+      <div class="kcal-line"><span class="kc">138 kcal</span><span class="kc-equiv"><span>🍚<b>0.5</b></span><span>🥤<b>1.0</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo cover" style="background-image:url('https://loremflickr.com/400/300/korean-rice-cake,tteok?lock=12')"></div>
+    <div class="cbody">
+      <div class="en">Rice Cake</div>
+      <div class="ko-name">떡</div>
+      <div class="cn-name">年糕 nián gāo</div>
+      <div class="benefit">쫀득 · 든든 · 한국인 픽</div>
+      <div class="kcal-line"><span class="kc">213 kcal</span><span class="kc-equiv"><span>🍚<b>0.7</b></span><span>🥤<b>1.5</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo cover" style="background-image:url('https://loremflickr.com/400/300/dried-tofu-skin,fuzhu?lock=13')">
+      <span class="badge">🔥</span>
+    </div>
+    <div class="cbody">
+      <div class="en">Tofu Skin / Fuzhu</div>
+      <div class="ko-name">건두부 / 푸주</div>
+      <div class="cn-name">腐竹 fǔ zhú</div>
+      <div class="benefit">단백질 ↑ · <b>씹는 맛</b> · 마라 잘 묻음</div>
+      <div class="kcal-line"><span class="kc">380 kcal</span><span class="kc-equiv"><span>🍚<b>1.3</b></span><span>🥤<b>2.7</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo" style="background-image:url('https://www.themealdb.com/images/ingredients/Tofu.png')"></div>
+    <div class="cbody">
+      <div class="en">Tofu</div>
+      <div class="ko-name">두부</div>
+      <div class="cn-name">豆腐 dòu fu</div>
+      <div class="benefit">식물성 단백질 · 다이어트</div>
+      <div class="kcal-line"><span class="kc">76 kcal</span><span class="kc-equiv"><span>🍚<b>0.3</b></span><span>🥤<b>0.5</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo cover" style="background-image:url('https://loremflickr.com/400/300/fried-tofu-pouch?lock=14')"></div>
+    <div class="cbody">
+      <div class="en">Fried Tofu</div>
+      <div class="ko-name">유부</div>
+      <div class="cn-name">豆腐皮 dòu fu pí</div>
+      <div class="benefit">고소함 · 국물 머금음</div>
+      <div class="kcal-line"><span class="kc">277 kcal</span><span class="kc-equiv"><span>🍚<b>0.9</b></span><span>🥤<b>2.0</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo cover" style="background-image:url('https://loremflickr.com/400/300/quail-egg,boiled?lock=15')"></div>
+    <div class="cbody">
+      <div class="en">Quail Egg</div>
+      <div class="ko-name">메추리알</div>
+      <div class="cn-name">鹌鹑蛋 ān chún dàn</div>
+      <div class="benefit">단백질 · 비타민 B</div>
+      <div class="kcal-line"><span class="kc">158 kcal</span><span class="kc-equiv"><span>🍚<b>0.5</b></span><span>🥤<b>1.1</b></span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="photo cover" style="background-image:url('https://loremflickr.com/400/300/dumpling,chinese-jiaozi?lock=16')"></div>
+    <div class="cbody">
+      <div class="en">Dumpling</div>
+      <div class="ko-name">만두</div>
+      <div class="cn-name">饺子 jiǎo zi</div>
+      <div class="benefit">한 끼 든든 · 고기 + 야채</div>
+      <div class="kcal-line"><span class="kc">250 kcal</span><span class="kc-equiv"><span>🍚<b>0.8</b></span><span>🥤<b>1.8</b></span></span></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  📸 사진은 비주얼 참고용 · 가격은 우버이츠 실가 (2026-05)<br/>
+  🍚 밥 1공기 ≈ 300 kcal · 🥤 콜라 1캔 ≈ 140 kcal 기준 환산<br/>
+  마라미니 · Palisades Park NJ · <a href="https://www.ubereats.com/store/mala-mini/H9lcNNhIUOK40fKiEwDv5w" target="_blank">🛵 Uber Eats 주문 →</a>
+</footer>
 
 </div>
 </body>
